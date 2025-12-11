@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lima en la Cocina</title>
+
+    <style>
+        @font-face {
+            font-family: 'BeautyDemo';
+            src: url('fonts/BeautyDemo.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KyivMachine';
+            src: url('fonts/Kyiv Machine.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --verde: #90C290;
+            --azul-escuro: #0D1C3D;
+            --bege: #F9F7F3;
+            --azul-claro: #A7C2E0;
+            --cinza: #D9D9D9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'KyivMachine', sans-serif;
+            background-color: #FCFAF6;
+            color: #3f5fa9;
+            line-height: 1.6;
+        }
+
+        /* ===== HERO ===== */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+            background-color: #FCFAF6;
+            align-items: center;
+        }
+
+        .hero-left {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-bg {
+            width: 626px;
+            height: 760px;
+        }
+
+        .hero-title-img {
+            width: 800px;
+            height: 380px;
+            margin-top: -200px;
+            margin-left: -20px;
+        }
+
+        .hero-right {
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .hero-paragrafo {
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 19px;
+            color: #3f5fa9;
+            max-width: 650px;
+            line-height: 1.6;
+            margin-left: 20px;
+        }
+
+        .btn.comprar {
+            margin-top: 24px;
+            margin-left: 20px;
+            align-self: flex-start;
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 22px;
+            background: #011936;
+            color: white;
+            padding: 16px 55px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .btn.comprar:hover {
+            background-color: #3f5fa9;
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-right {
+                padding: 2rem;
+                align-items: center;
+            }
+
+            .btn.comprar {
+                align-self: center;
+                margin-left: 0;
+            }
+        }
+
+        /* ===== SEÇÃO RECEITAS ===== */
+
+        .receitas {
+            background-color: #011936;
+            color: #fff;
+            text-align: center;
+            padding: 0 0 80px 0;
+        }
+
+        .receitas-faixa {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-top: -40px;
+        }
+
+        .receitas-titulo {
+            font-family: 'BeautyDemo', cursive;
+            font-size: 90px;
+            margin-top: 60px;
+            margin-bottom: 50px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .cards .card {
+            width: 350px;
+            height: 324px;
+            border-radius: 40px;
+            display: block;
+        }
+
+        /* ===== SEÇÃO IMPRIMIR ===== */
+
+        .imprimir {
+            background-color: #FCFAF6 !important;
+            padding: 0 2rem 4rem;
+            position: relative;
+        }
+
+        .faixa-wrapper {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(to bottom,
+                    #011936 0%,
+                    #011936 50%,
+                    #FCFAF6 50%,
+                    #FCFAF6 100%);
+        }
+
+        .imprimir-faixa {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .imprimir h2 {
+            font-family: 'BeautyDemo', cursive;
+            font-size: 90px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: ##3f5fa9;
+            text-align: center;
+        }
+
+        .imprimir p {
+            font-family: 'KyivMachine', sans-serif;
+            max-width: 1100px;
+            margin: 0 auto 3rem;
+            font-size: 18px;
+            color: #3f5fa9;
+            text-align: left;
+        }
+
+        .form-area {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: nowrap;
+            width: 100%;
+            max-width: 1500px;
+            margin-left: 100px;
+            margin-right: auto;
+        }
+
+        /* ===== PÁGINAS A5 (TELA) ===== */
+
+        .print-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            align-items: center;
+            width: 100%;
+            margin-bottom: -100px !important;
+        }
+
+        .print-preview .pagina-a5 {
+            transform: scale(0.7);
+            transform-origin: top left;
+            margin-top: 0 !important;
+        }
+
+        .print-preview .pagina-a5+.pagina-a5 {
+            margin-top: 20px;
+        }
+
+        .pagina-a5:last-child {
+            page-break-after: auto;
+            margin-top: -220px !important;
+        }
+
+        .pagina-a5 {
+            width: 595px;
+            height: 842px;
+            background: white;
+            padding: 60px 60px 40px 60px;
+            border: 1px solid #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Selo no topo direito (pág. esquerda) */
+        .selo-pagina {
+            position: absolute;
+            top: 0px;
+            right: 100px;
+            width: 25px;
+            height: auto;
+        }
+
+        /* Título BEAUTY (pág. esquerda) */
+        .titulo-receita {
+            font-family: 'BeautyDemo';
+            font-size: 120px;
+            color: #94C11F !important;
+            line-height: 0.5;
+            letter-spacing: -1px;
+            margin-top: 180px;
+            margin-bottom: 15px;
+            max-width: 100%;
+            word-wrap: break-word;
+            margin-left: 10px;
+        }
+
+        .descricao-receita {
+            font-family: 'KyivMachine';
+            font-size: 9px !important;
+            color: #3f5fa9;
+            max-width: 480px !important;
+            margin-top: 30px;
+            line-height: 1.0;
+            white-space: normal;
+            word-wrap: break-word;
+            margin-left: 40px;
+        }
+
+        /* Ilustração / Foto página esquerda */
+        .imagem-esquerda {
+            width: 60%;
+            margin-top: 50px;
+            margin-left: 10%;
+            object-fit: contain;
+            align-items: center;
+        }
+
+        .lima-inferior-esq {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            left: auto;
+            width: 25px;
+            height: auto;
+        }
+
+        /* ===== PÁGINA DIREITA A5 ===== */
+
+        .durex {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: auto;
+        }
+
+        #pagina-direita .foto-principal {
+            margin-top: 10px;
+            width: 85%;
+            object-fit: cover;
+            max-height: 260px;
+            border-radius: 6px;
+        }
+
+        /* ÍCONES + TEXTOS (porção, tempo, nível, kcal) */
+        /* CONTAINER CENTRALIZADO */
+        .infos-rapidas {
+            width: 100%;
+            display: flex !important;
+            justify-content: center !important;
+            /* centraliza tudo */
+            gap: 40px !important;
+            /* espaçamento perfeito */
+            margin: 20px 0 !important;
+            padding: 0;
+        }
+
+        /* CADA ÍCONE + TEXTO É UMA COLUNA VERTICAL */
+        .info-item {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            /* centraliza ícone e texto */
+            justify-content: flex-start !important;
+            min-width: 70px !important;
+            /* garante largura consistente */
+        }
+
+        /* ÍCONES TÊM A MESMA ALTURA */
+        .info-icone {
+            width: 32px !important;
+            height: 32px !important;
+            /* altura uniforme */
+            object-fit: contain !important;
+            margin: 0 !important;
+            /* remove deslocamentos */
+        }
+
+        /* TEXTOS EMBAIXO DOS ÍCONES — 100% ALINHADOS */
+        .info-item span {
+            margin-top: 6px !important;
+            font-size: 10pt !important;
+            text-align: center !important;
+            line-height: 1.1 !important;
+        }
+
+        /* AJUSTE DE COLUNAS PARA NÃO EMPURRAR O BLOCO */
+        .colunas-direita {
+            margin-top: 26px !important;
+            display: grid !important;
+            grid-template-columns: 1fr 1.4fr !important;
+            align-items: flex-start !important;
+            column-gap: 36px !important;
+        }
+
+
+        #icone-porcao {
+            width: 30px !important;
+            height: auto;
+        }
+
+        #pagina-direita .foto-principal {
+            width: 100%;
+            max-height: 270px;
+            object-fit: cover;
+            margin-top: 110px;
+        }
+
+        /* CONTAINER CENTRALIZADO */
+        .infos-rapidas {
+            width: 100%;
+            display: flex !important;
+            justify-content: center !important;
+            /* centraliza tudo */
+            gap: 40px !important;
+            /* espaçamento perfeito */
+            margin: 20px 0 !important;
+            padding: 0;
+        }
+
+        /* CADA ÍCONE + TEXTO É UMA COLUNA VERTICAL */
+        .info-item {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            /* centraliza ícone e texto */
+            justify-content: flex-start !important;
+            min-width: 70px !important;
+            /* garante largura consistente */
+        }
+
+        /* ÍCONES TÊM A MESMA ALTURA */
+        .info-icone {
+            width: 32px !important;
+            height: 32px !important;
+            /* altura uniforme */
+            object-fit: contain !important;
+            margin: 0 !important;
+            /* remove deslocamentos */
+        }
+
+        /* TEXTOS EMBAIXO DOS ÍCONES — 100% ALINHADOS */
+        .info-item span {
+            margin-top: 6px !important;
+            font-size: 10pt !important;
+            text-align: center !important;
+            line-height: 1.1 !important;
+        }
+
+        /* AJUSTE DE COLUNAS PARA NÃO EMPURRAR O BLOCO */
+        .colunas-direita {
+            margin-top: 26px !important;
+            display: grid !important;
+            grid-template-columns: 1fr 1.4fr !important;
+            align-items: flex-start !important;
+            column-gap: 36px !important;
+        }
+
+
+        .infos-textos span {
+            text-align: center;
+            flex: 1;
+        }
+
+        .colunas-direita {
+            display: grid;
+            grid-template-columns: 1.1fr 1.4fr;
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .ingredientes-box,
+        .modo-box {
+            font-family: 'KyivMachine';
+            color: #3f5fa9;
+            font-size: 8px;
+        }
+
+        .ingredientes-box h3,
+        .modo-box h3 {
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+
+        .ingredientes-box p,
+        .modo-box p {
+            white-space: pre-line;
+            line-height: 1.5;
+        }
+
+        .lima-inferior-dir {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            width: 25px;
+            height: auto;
+        }
+
+        /* ===== FORMULÁRIO ===== */
+
+        .label-print {
+            font-family: 'KyivMachine';
+            font-size: 12px;
+            color: #3f5fa9;
+            margin: 8px 0 4px 40px;
+        }
+
+        .form-bloco {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .campo-label {
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 20px;
+            color: #3f5fa9;
+        }
+
+        .campo-full,
+        .select-tipo {
+            width: 100%;
+            height: 54px;
+            padding: 0 20px;
+            border-radius: 16px;
+            border: none;
+            background: #ffffff;
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 18px;
+        }
+
+        .campo-grande {
+            width: 100%;
+            padding: 18px 20px;
+            border-radius: 16px;
+            border: none;
+            background: #ffffff;
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 18px;
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .linha-mini {
+            display: flex;
+            gap: 14px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .linha-mini input {
+            flex: 1;
+            min-width: 100px;
+            height: 60px;
+            padding: 0 16px;
+            border-radius: 16px;
+            border: none;
+            background: #ffffff;
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 17px;
+        }
+
+        input[type="file"] {
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 17px;
+            color: #3f5fa9;
+        }
+
+        .botoes-imprimir {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .botoes-imprimir .imprimir-btn {
+            margin: 0 !important;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .imprimir-btn {
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 22px;
+            background: #011936;
+            color: white;
+            padding: 16px 55px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        .imprimir-btn:hover {
+            background-color: #022042;
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+
+        @media (max-width: 1100px) {
+            .form-area {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-left: 0;
+            }
+        }
+
+        /* ===== SEÇÃO HISTÓRIA ===== */
+
+        .historia {
+            background: #011936;
+            padding-bottom: 80px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .historia-faixa img {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            display: block;
+        }
+
+        .historia-titulo {
+            font-family: 'BeautyDemo', cursive;
+            font-size: 90px;
+            color: #fff;
+            text-align: center;
+            margin-top: 80px;
+            margin-bottom: 40px;
+        }
+
+        .historia-conteudo {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            max-width: 1300px;
+            margin: 0 auto;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .historia-imagem-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .historia-imagem {
+            width: 420px;
+            height: auto;
+            display: block;
+        }
+
+        .historia-texto {
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 19px;
+            line-height: 1.8;
+            color: #fff;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .historia-conteudo {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .historia-texto {
+                text-align: left;
+                padding: 0 1.5rem;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+
+        .footer {
+            width: 100%;
+            height: 68px;
+            background-color: #89F336;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer p {
+            font-family: 'KyivMachine', sans-serif;
+            font-size: 20px;
+            color: #011936;
+            margin: 0;
+        }
+
+        /* ===== IMPRESSÃO ===== */
+
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        @media print {
+
+            body {
+                margin: 0;
+                padding: 0;
+                background: #ffffff;
+            }
+
+            /* Esconde tudo por padrão */
+            body * {
+                visibility: hidden !important;
+            }
+
+            /* Mostra apenas a área de impressão */
+            #print-area {
+                position: fixed !important;
+                inset: 0 !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center !important;
+                align-items: center !important;
+                gap: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                visibility: visible !important;
+            }
+
+            #print-area * {
+                visibility: visible !important;
+            }
+
+            #print-area .pagina-a5 {
+                width: 148mm !important;
+                height: 210mm !important;
+                transform: none !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 40px !important;
+                box-shadow: none !important;
+                background: #ffffff !important;
+                page-break-inside: avoid;
+            }
+
+            /* Some com o resto na impressão */
+            .botoes-imprimir,
+            #recipeForm,
+            .hero,
+            .receitas,
+            .historia,
+            .footer,
+            .imprimir>h2,
+            .imprimir>p {
+                display: none !important;
+            }
+        }
+
+        /* ===== AJUSTES SOLICITADOS ===== */
+
+        /* remover qualquer rótulo automático (Descrição:, etc.) */
+        #label-descricao,
+        #label-modo {
+            display: none !important;
+        }
+
+        /* tamanhos de fonte */
+        .descricao-receita {
+            font-size: 9pt !important;
+        }
+
+        #ingredientes-preview {
+            font-size: 9pt !important;
+            line-height: 1.3 !important;
+        }
+
+        #modo-preview {
+            font-size: 10pt !important;
+            line-height: 1.4 !important;
+        }
+
+        /* alinhar ingredientes e modo pelo topo */
+        .colunas-direita {
+            align-items: start !important;
+        }
+
+        .ingredientes-box,
+        .modo-box {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+        }
+
+
+        /* =================== AJUSTES DE DIAGRAMAÇÃO – FIDELIDADE AO MODELO =================== */
+
+        /* ----- PÁGINA ESQUERDA ----- */
+        #pagina-esquerda {
+            padding: 70px 60px 40px 60px !important;
+        }
+
+        .titulo-receita {
+            margin-top: 120px !important;
+            /* aproxima do topo como no modelo */
+        }
+
+        #descricao-preview {
+            margin-top: 25px !important;
+            /* aproximar do título */
+            line-height: 1.45 !important;
+            font-size: 9pt !important;
+            max-width: 440px !important;
+        }
+
+
+        /* ----- COLUNAS DIREITA ----- */
+        .colunas-direita {
+            margin-top: 25px !important;
+            /* desce tudo proporcionalmente */
+            display: grid !important;
+            grid-template-columns: 1fr 1.4fr !important;
+            align-items: flex-start !important;
+            gap: 40px !important;
+            /* mais perto do modelo */
+        }
+
+        /* Título Ingredientes — ajustar tamanho e peso */
+        .ingredientes-box h3 {
+            font-size: 12pt !important;
+            margin-bottom: 10px !important;
+        }
+
+        /* Ingredientes — igual ao modelo */
+        #ingredientes-preview {
+            font-family: 'KyivMachine' !important;
+            font-size: 9pt !important;
+            line-height: 1.5 !important;
+            white-space: pre-line !important;
+        }
+
+        /* Modo de Preparo */
+        .modo-box h3 {
+            font-size: 13pt !important;
+            margin-bottom: 12px !important;
+        }
+
+        #modo-preview {
+            font-size: 10pt !important;
+            line-height: 1.55 !important;
+            white-space: pre-line !important;
+        }
+
+        /* Remover "Descrição:" */
+        #label-descricao,
+        #label-modo {
+            display: none !important;
+        }
+
+
+        /* 2) MODO DE PREPARO – ENTRELINHA MAIS FECHADA */
+        #modo-preview {
+            font-size: 10pt !important;
+            line-height: 1.35 !important;
+            /* mais compacto do que antes */
+            white-space: pre-line !important;
+        }
+
+        /* se quiser igualar um pouco o bloco de ingredientes também: */
+        #ingredientes-preview {
+            font-size: 9pt !important;
+            line-height: 1.4 !important;
+        }
+
+
+        /* 3) ILUSTRAÇÃO DA PÁGINA ESQUERDA – NÃO CORTAR NA IMPRESSÃO */
+        #pagina-esquerda {
+            padding-bottom: 40px !important;
+            /* dá mais respiro embaixo para a ilustração */
+        }
+
+        #img-esquerda-preview {
+            width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+            display: block !important;
+            margin-top: 20px !important;
+        }
+
+        /* no modo impressão, limita ainda mais a altura para nunca cortar */
+        @media print {
+            #img-esquerda-preview {
+                max-height: 80mm !important;
+                object-fit: contain !important;
+            }
+        }
+
+
+        /* FOTO PRINCIPAL — DEFINIÇÃO ÚNICA */
+        #foto-principal-preview {
+            margin-top: 0 !important;
+            width: 100% !important;
+            height: auto !important;
+            max-height: 260px !important;
+            /* altura perfeita pro layout */
+            object-fit: cover !important;
+            display: block !important;
+            z-index: 1 !important;
+            position: relative !important;
+        }
+
+        /* DUREX */
+        .durex {
+            position: absolute !important;
+            top: -10px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            z-index: 999 !important;
+            width: 160px !important;
+        }
+
+
+        /* ===== AJUSTE GLOBAL: descer tudo da página direita ===== */
+        #pagina-direita {
+            position: relative !important;
+            padding-top: 140px !important;
+            /* valor ideal — pode ajustar para 100–150px */
+        }
+
+        /* ===== DUREX DESCE JUNTO ===== */
+        .durex {
+            top: 80px !important;
+            /* antes estava negativo, causando desajuste */
+        }
+
+        /* ===== FOTO DESCE JUNTO COM O RESTO ===== */
+        #foto-principal-preview {
+            margin-top: -40px !important;
+            /* antes estava colando no topo */
+        }
+
+        /* ===== ÍCONES MANTÊM PROPORÇÃO ===== */
+        .infos-rapidas {
+            margin-top: 24px !important;
+            /* ajusta corretamente após a foto */
+        }
+
+        /* ===== COLUNAS DIREITA DESCEM JUNTO ===== */
+        .colunas-direita {
+            margin-top: 28px !important;
+        }
+
+        /* =============================== */
+        /* CORREÇÃO DEFINITIVA DO OFFSET DA FOTO NO PRINT */
+        /* =============================== */
+
+        @media print {
+
+            /* Garante que a página direita mantenha o respiro superior original */
+            #pagina-direita {
+                padding-top: 120px !important;
+                /* ajuste fino aqui */
+            }
+
+            /* O durex acompanha esse padding */
+            .durex {
+                top: 20px !important;
+            }
+
+            /* A foto nunca cola no topo, respeita o padding */
+            #foto-principal-preview {
+                margin-top: 0 !important;
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section id="secao-hero" class="hero">
+        <div class="hero-left">
+            <img src="img/626_760_1.png" alt="Fundo xadrez com moldura" class="hero-bg" />
+        </div>
+
+        <div class="hero-right">
+            <img src="img/774_380_2.png" alt="Lima en la Cocina" class="hero-title-img" />
+
+            <p class="hero-paragrafo">
+                “Lima en la Cocina” é mais do que um livro de receitas. Mergulha nas memórias que moram no sabor.
+                Inspirado no caderno original de minha mãe, o projeto nasce do desejo de preservar e reimaginar as
+                histórias que se misturam entre ingredientes e gestos cotidianos. Cada página é um convite a sentir o
+                tempo, o afeto e as heranças que atravessam gerações, transformando o ato de cozinhar em um exercício
+                de lembrança e criação.
+            </p>
+
+            <button class="btn comprar">Comprar livro</button>
+        </div>
+    </section>
+
+    <!-- RECEITAS -->
+    <section id="secao-receitas" class="receitas">
+        <img src="img/1400_68_3.gif" class="receitas-faixa" alt="Faixa de limas" />
+
+        <h2 class="receitas-titulo">Nossas receitas</h2>
+
+        <div class="cards">
+            <img src="img/350_324_4.png" class="card" alt="Receita 1" />
+            <img src="img/350_324_5.png" class="card" alt="Receita 2" />
+            <img src="img/350_324_6.png" class="card" alt="Receita 3" />
+        </div>
+    </section>
+
+    <!-- IMPRIMIR -->
+    <section class="imprimir" id="secao-imprimir">
+
+        <div class="faixa-wrapper">
+            <img src="img/1400_160_8.png" class="imprimir-faixa" alt="Faixa decorativa" />
+        </div>
+
+        <h2>Para imprimir</h2>
+
+        <p>
+            Aqui, o livro continua crescendo com você. Cada receita é um pedacinho de história e de ancestralidade.
+            <br>Compartilhe a sua e deixe que
+            ela também faça parte dessa coleção afetiva.<br /><br />
+            <strong>Como montar sua receita no livro:</strong><br /><br />
+            1. Use duas folhas A5 com furo cogumelo. Uma será a página esquerda e a outra a página direita da
+            receita.<br />
+            2. Página esquerda: preencha o título, a descrição e adicione uma ilustração ou foto (pode ser desenho seu,
+            foto
+            do prato ou algo que represente a receita).<br />
+            3. Página direita: pense nos ingredientes, modo de preparo, tempo, porção, nível e calorias. A foto
+            principal da
+            receita também pode ser enviada aqui.<br />
+            4. Revise a prévia das duas páginas. Elas serão impressas separadamente, cada uma no seu A5.<br />
+            5. Clique em “Imprimir receita” e selecione tamanho A5 em orientação retrato.<br />
+            6. Encaixe no seu caderno e pronto: sua receita vira parte do livro.<br><br>
+
+            Para imprimir no verso da sua receita, há um PDF de anotações para detalhes, histórias da família e o que
+            mais
+            quiser deixar escrito nesse memorial.
+        </p>
+
+        <div class="form-area">
+            <!-- FORMULÁRIO -->
+            <form id="recipeForm">
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="tipo-receita">Tipo de receita</label>
+                    <select id="tipo-receita" class="select-tipo">
+                        <option value="cafe">Café da manhã</option>
+                        <option value="prato">Prato principal</option>
+                        <option value="sobremesa">Sobremesa</option>
+                    </select>
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="titulo">Título da receita</label>
+                    <input type="text" id="titulo" class="campo-full" placeholder="Ex.: Bolo amor de vó" />
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="descricao">Descrição curta</label>
+                    <textarea id="descricao" class="campo-grande"
+                        placeholder="Uma memória, uma história, um carinho em forma de receita..."></textarea>
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="foto-ilustracao">Ilustração ou foto (página esquerda)</label>
+                    <input type="file" id="foto-ilustracao" class="campo-full" accept="image/*" />
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="foto-principal">Foto principal (página direita)</label>
+                    <input type="file" id="foto-principal" class="campo-full" accept="image/*" />
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label">Informações rápidas</label>
+                    <div class="linha-mini">
+                        <input type="text" id="tempo" placeholder="Tempo" />
+                        <input type="text" id="porcao" placeholder="Porção" />
+                        <input type="text" id="nivel" placeholder="Nível" />
+                        <input type="text" id="kcal" placeholder="Kcal" />
+                    </div>
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="ingredientes">Ingredientes</label>
+                    <textarea id="ingredientes" class="campo-grande"
+                        placeholder="Liste aqui os ingredientes da receita..."></textarea>
+                </div>
+
+                <div class="form-bloco">
+                    <label class="campo-label" for="modo-preparo">Modo de preparo</label>
+                    <textarea id="modo-preparo" class="campo-grande"
+                        placeholder="Descreva aqui o passo a passo..."></textarea>
+                </div>
+
+            </form>
+
+            <!-- PRÉVIA / ÁREA DE IMPRESSÃO -->
+            <div id="print-area" class="print-preview">
+
+                <!-- PÁGINA ESQUERDA A5 -->
+                <div class="pagina-a5" id="pagina-esquerda">
+
+                    <img id="selo-esquerda" class="selo-pagina" src="img/selo_cdm.png" alt="Selo tipo de receita" />
+
+                    <h1 id="titulo-preview" class="titulo-receita"></h1>
+
+                    <p id="label-descricao" class="label-print"></p>
+
+                    <p id="descricao-preview" class="descricao-receita"></p>
+
+                    <img id="img-esquerda-preview" class="imagem-esquerda" alt="Ilustração da receita" />
+
+                    <img src="img/lima_esquerda.png" class="lima-inferior-esq" alt="Lima decorativa" />
+                </div>
+
+                <!-- PÁGINA DIREITA A5 -->
+                <div class="pagina-a5" id="pagina-direita">
+
+                    <img src="img/durex.png" class="durex" alt="Fita adesiva" />
+
+                    <img id="foto-principal-preview" class="foto-principal" alt="Prévia da foto principal">
+                    <p id="label-infos" class="label-print"></p>
+
+                    <div class="infos-rapidas">
+                        <div class="info-item">
+                            <img src="img/porcao.png" class="info-icone" id="icone-porcao">
+                            <span id="porcao-preview">—</span>
+                        </div>
+
+                        <div class="info-item">
+                            <img src="img/tempo.png" class="info-icone" id="icone-tempo">
+                            <span id="tempo-preview">—</span>
+                        </div>
+
+                        <div class="info-item">
+                            <img src="img/nivel.png" class="info-icone" id="icone-nivel">
+                            <span id="nivel-preview">—</span>
+                        </div>
+
+                        <div class="info-item">
+                            <img src="img/kcal.png" class="info-icone" id="icone-kcal">
+                            <span id="kcal-preview">—</span>
+                        </div>
+                    </div>
+
+                    <div class="colunas-direita">
+                        <div class="ingredientes-box">
+                            <h3>Ingredientes</h3>
+                            <p id="ingredientes-preview"></p>
+                        </div>
+
+                        <div class="modo-box">
+                            <p id="label-modo" class="label-print"></p>
+                            <h3>Modo de preparo</h3>
+                            <p id="modo-preview"></p>
+                        </div>
+                    </div>
+
+                    <img src="img/lima_direita.png" class="lima-inferior-dir" alt="Lima decorativa" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="botoes-imprimir">
+            <button class="imprimir-btn" type="button" onclick="imprimirA4()">Imprimir</button>
+            <a class="imprimir-btn" href="img/anotacoesmiolo.pdf" target="_blank" rel="noopener noreferrer">
+                PDF verso
+            </a>
+        </div>
+
+    </section>
+
+    <!-- HISTÓRIA -->
+    <section class="historia">
+        <div class="historia-faixa">
+            <img src="img/1400_68_3.gif" alt="Faixa de limas" />
+        </div>
+
+        <h2 class="historia-titulo">Nossa historia</h2>
+
+        <div class="historia-conteudo">
+            <div class="historia-imagem-wrapper">
+                <img src="img/446_548_9.png" class="historia-imagem" alt="Família" />
+            </div>
+
+            <div class="historia-texto">
+                <p>
+                    Na minha família somos como uma limeira antiga, que cresce mesmo nos terrenos mais improváveis. Cada
+                    uma de
+                    nós ocupa um lugar essencial nessa árvore que nunca deixou de dar frutos.
+                </p>
+                <p>
+                    Minha avó é a raiz profunda, guardando o sabor, a memória e o jeito antigo de cuidar. É nela que
+                    tudo começa,
+                    no gesto intuitivo, na sabedoria que se aprende olhando, sentindo, repetindo.
+                </p>
+                <p>
+                    Minha mãe é o tronco que sustenta, firme no meio do caminho. Carrega as marcas, os improvisos e o
+                    cotidiano
+                    que molda. É ela que segura a continuidade e transforma a raiz em história viva, organizada, escrita
+                    e
+                    compartilhada.
+                </p>
+                <p>
+                    Eu sou os galhos que se estendem para o alto, abrindo espaço para o novo. Cresço porque elas vieram
+                    antes,
+                    porque a força que me move nasce dessa terra afetiva onde fomos plantadas. Nos galhos moram as
+                    possibilidades,
+                    as experimentações e a vontade de transformar memória em criação.
+                </p>
+                <p>
+                    Este livro nasce dessa árvore inteira. É fruto de gerações que cozinham, lembram, inventam e cuidam.
+                    Cada
+                    página carrega um pouco da raiz, do tronco e dos galhos. Carrega a nossa forma de existir em
+                    família, simples,
+                    saborosa e cheia de histórias que continuam a brotar.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Projeto de Conclusão de Curso de CVD - UFRJ — ano de 2025</p>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        function imprimirA4() {
+            // Pequeno delay para garantir que o DOM está renderizado
+            setTimeout(() => {
+                window.print();
+            }, 50);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectTipo = document.getElementById('tipo-receita');
+            const seloEsq = document.getElementById('selo-esquerda');
+
+            function atualizarSelo() {
+                if (!selectTipo || !seloEsq) return;
+
+                if (selectTipo.value === 'cafe') {
+                    seloEsq.src = 'img/selo_cdm.png';
+                } else if (selectTipo.value === 'prato') {
+                    seloEsq.src = 'img/selo_pp.png';
+                } else {
+                    seloEsq.src = 'img/selo_sobremesa.png';
+                }
+            }
+
+            if (selectTipo) {
+                selectTipo.addEventListener('change', atualizarSelo);
+                atualizarSelo();
+            }
+
+            // liga inputs de texto com a prévia
+            const tituloInput = document.getElementById('titulo');
+            const tituloPreview = document.getElementById('titulo-preview');
+            const descInput = document.getElementById('descricao');
+            const descPreview = document.getElementById('descricao-preview');
+
+            const porcaoInput = document.getElementById('porcao');
+            const tempoInput = document.getElementById('tempo');
+            const nivelInput = document.getElementById('nivel');
+            const kcalInput = document.getElementById('kcal');
+
+            const porcaoPreview = document.getElementById('porcao-preview');
+            const tempoPreview = document.getElementById('tempo-preview');
+            const nivelPreview = document.getElementById('nivel-preview');
+            const kcalPreview = document.getElementById('kcal-preview');
+
+            const ingredientesInput = document.getElementById('ingredientes');
+            const ingredientesPreview = document.getElementById('ingredientes-preview');
+            const modoInput = document.getElementById('modo-preparo');
+            const modoPreview = document.getElementById('modo-preview');
+
+            function syncText() {
+
+                const labelDescricao = document.getElementById("label-descricao");
+                const labelInfos = document.getElementById("label-infos");
+                const labelIngredientes = document.getElementById("label-ingredientes");
+                const labelModo = document.getElementById("label-modo");
+
+
+                if (labelInfos) labelInfos.textContent = "";
+                if (labelIngredientes) labelIngredientes.textContent = "Ingredientes:";
+
+
+                if (tituloPreview && tituloInput) {
+                    tituloPreview.textContent = tituloInput.value;
+                }
+                if (descPreview && descInput) {
+                    descPreview.textContent = descInput.value;
+                }
+                if (porcaoPreview && porcaoInput) {
+                    porcaoPreview.textContent = porcaoInput.value ? porcaoInput.value : '';
+                }
+                if (tempoPreview && tempoInput) {
+                    tempoPreview.textContent = tempoInput.value ? tempoInput.value : '';
+                }
+                if (nivelPreview && nivelInput) {
+                    nivelPreview.textContent = nivelInput.value ? nivelInput.value : '';
+                }
+                if (kcalPreview && kcalInput) {
+                    kcalPreview.textContent = kcalInput.value ? kcalInput.value : '';
+                }
+                if (ingredientesPreview && ingredientesInput) {
+                    ingredientesPreview.textContent = ingredientesInput.value;
+                }
+                if (modoPreview && modoInput) {
+                    modoPreview.textContent = modoInput.value;
+                }
+            }
+
+            [
+                tituloInput,
+                descInput,
+                porcaoInput,
+                tempoInput,
+                nivelInput,
+                kcalInput,
+                ingredientesInput,
+                modoInput
+            ].forEach(el => {
+                if (el) el.addEventListener('input', syncText);
+            });
+
+            syncText();
+
+            // prévias de imagem
+            function bindImagePreview(inputId, imgId) {
+                const input = document.getElementById(inputId);
+                const img = document.getElementById(imgId);
+                if (!input || !img) return;
+
+                input.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const url = URL.createObjectURL(file);
+                    img.src = url;
+                    img.style.display = 'block';
+                });
+            }
+
+            bindImagePreview('foto-ilustracao', 'img-esquerda-preview');
+            bindImagePreview('foto-principal', 'foto-principal-preview');
+        });
+    </script>
+
+</body>
+
+</html>
